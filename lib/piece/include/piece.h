@@ -6,7 +6,7 @@
 #include <string>
 using std::string;
 
-extern const float conveyor_width = 10;   // larghezza assegnata al nastro trasportatore
+//extern const float conveyor_width = 10;   // larghezza assegnata al nastro trasportatore
 
 class Piece{
     public:

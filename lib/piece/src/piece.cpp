@@ -20,15 +20,15 @@ Piece::Piece(uint min, uint sec, string piece_type, float pos)
         piece_type_{piece_type},
         pos_{pos}
 {
-    if(!is_pos(pos)){ 
+    /*if(!is_pos(pos)){ 
             cerr << "La posizione insierita non è valida." << endl << "Possibile guasto del sistema di visione!" << endl;
             exit(EXIT_FAILURE);
-        }
+        }*/
 }
-
+/*
 bool is_pos(uint position){
     if(position <= conveyor_width)
         return true;
     else
         return false;
-}
+}*/
