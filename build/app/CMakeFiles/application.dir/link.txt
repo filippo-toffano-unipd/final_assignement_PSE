@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/application.dir/src/main.cpp.o  -o application  ../lib/piece/libpiece.a ../lib/box/libbox.a ../lib/store/libstore.a ../lib/vision_system/libvision_system.a ../lib/box/libbox.a ../lib/piece/libpiece.a 

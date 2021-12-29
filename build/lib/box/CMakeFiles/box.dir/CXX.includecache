@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/box/include/box.h
+piece.h
+../lib/box/include/piece.h
+string
+-
+
+../lib/piece/include/piece.h
+string
+-
+
+/home/filippo-toffano/embedded_system_programming/final_assignement/lib/box/src/box.cpp
+string
+-
+piece.h
+/home/filippo-toffano/embedded_system_programming/final_assignement/lib/box/src/piece.h
+box.h
+/home/filippo-toffano/embedded_system_programming/final_assignement/lib/box/src/box.h
+

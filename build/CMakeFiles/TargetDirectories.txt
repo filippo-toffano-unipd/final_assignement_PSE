@@ -1,0 +1,17 @@
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/app/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/app/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/app/CMakeFiles/application.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/piece/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/piece/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/piece/CMakeFiles/piece.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/box/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/box/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/box/CMakeFiles/box.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/store/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/store/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/store/CMakeFiles/store.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/vision_system/CMakeFiles/rebuild_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/vision_system/CMakeFiles/edit_cache.dir
+/home/filippo-toffano/embedded_system_programming/final_assignement/build/lib/vision_system/CMakeFiles/vision_system.dir

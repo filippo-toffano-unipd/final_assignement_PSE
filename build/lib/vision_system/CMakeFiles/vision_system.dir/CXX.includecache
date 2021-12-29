@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/vision_system/include/vision_system.h
+fstream
+-
+string
+-
+vector
+-
+string
+-
+
+/home/filippo-toffano/embedded_system_programming/final_assignement/lib/vision_system/src/vision_system.cpp
+iostream
+-
+fstream
+-
+string
+-
+vector
+-
+vision_system.h
+/home/filippo-toffano/embedded_system_programming/final_assignement/lib/vision_system/src/vision_system.h
+
