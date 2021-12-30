@@ -21,13 +21,13 @@ using std::condition_variable;
 class PieceBuffer{
 
     public:
-    void append_piece(const Piece &piece);
-    Piece take_piece();
+        void append_piece(const Piece &piece);
+        Piece take_piece();
 
     private:
-    queue<Piece> output_queue_;
-    mutex mtx_;
-    condition_variable not_empty_;
+        queue<Piece> output_queue_;
+        mutex mtx_;
+        condition_variable not_empty_;
 
 };
 

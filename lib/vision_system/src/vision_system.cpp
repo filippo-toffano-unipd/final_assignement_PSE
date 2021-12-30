@@ -21,7 +21,7 @@ using std::queue;
 #include "piece.h"
 #include "piece_buffer.h"
 
-PieceBuffer piece_queue_line1;
+//PieceBuffer piece_queue_line1;
 
 void vision_system_thread_main(string file_path){
 

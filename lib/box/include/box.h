@@ -1,26 +1,30 @@
 // box.h
-/*
+
 #ifndef BOX_H
 #define BOX_H
 
+#include <vector>
+using std::vector;
+
+#include <mutex>
+using std::mutex;
+
 #include "piece.h"
-#include <string>
-using std::string;
+
+uint const box_capacity = 10;
 
 class Box{
     public:
         Box();  // default constructor 
-        Box(uint box_ID, Piece piece_info, uint capacity); // class constructor
-        
+        Box(uint box_ID); // class constructor
         uint box_ID() const { return box_ID_; }
-        Piece piece_info() const { return piece_info_; }
-        uint capacity() const { return capacity_; }
+        void load_piece(const Piece &object_box);
 
     private:
         uint box_ID_;       // box identifier
-        Piece piece_info_;  // information about pieces 
-        uint capacity_;     // box capacity 
+        vector<Piece> output_box_;
+        mutex mtx_box_;
 };
 
 #endif
-*/
+

@@ -6,8 +6,6 @@
 #include <string>
 using std::string;
 
-//extern const float conveyor_width = 10;   // larghezza assegnata al nastro trasportatore
-
 class Piece{
     public:
         Piece();    // default constructor
@@ -15,7 +13,7 @@ class Piece{
         uint get_min() const { return min_; }
         uint get_sec() const { return sec_; }
         string get_piece_type() const { return piece_type_; }
-        float get_pos() const { pos_; }
+        float get_pos() const { return pos_; }
 
         void set_min( const uint min);
         void set_sec( const uint sec);

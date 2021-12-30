@@ -14,6 +14,10 @@ using std::vector;
 #include <string>
 using std::string; 
 
+#include "piece_buffer.h"
+
+extern PieceBuffer piece_queue_line1;
+
 // Thread main program
 void vision_system_thread_main(string file_path);
 
