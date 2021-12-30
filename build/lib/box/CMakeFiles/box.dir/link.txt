@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbox.a  CMakeFiles/box.dir/src/box.cpp.o
-/usr/bin/ranlib libbox.a

@@ -14,7 +14,10 @@ using std::vector;
 #include <string>
 using std::string; 
 
-// Funzione lettura dati input linea 1
+// Thread main program
+void vision_system_thread_main(string file_path);
+
+// Funzione lettura dati input linea 
 string read_input_file(ifstream &input_file);
 
 // Funzione per separare gli elementi estratti dai file di input

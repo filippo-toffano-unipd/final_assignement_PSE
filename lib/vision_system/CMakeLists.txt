@@ -14,7 +14,7 @@ target_include_directories( vision_system
         
 target_link_libraries( vision_system
         PUBLIC PSE::piece
-        PUBLIC PSE::vision_system
+        PUBLIC PSE::piece_buffer
 )
 
 add_library(PSE::vision_system ALIAS vision_system)

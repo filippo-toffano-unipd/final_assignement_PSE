@@ -11,4 +11,5 @@ target_link_libraries(application
     PUBLIC PSE::box
     PUBLIC PSE::store
     PUBLIC PSE::vision_system
+    PUBLIC PSE::piece_buffer
 )
