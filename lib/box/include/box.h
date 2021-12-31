@@ -9,6 +9,9 @@ using std::vector;
 #include <mutex>
 using std::mutex;
 
+#include <condition_variable>
+using std::condition_variable;
+
 #include "piece.h"
 
 class Box{
@@ -24,6 +27,7 @@ class Box{
         uint box_ID_;       // box identifier
         vector<Piece> output_box_;
         mutex mtx_box_;
+        condition_variable box_not_full_;
 };
 
 #endif

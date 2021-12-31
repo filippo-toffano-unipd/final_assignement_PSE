@@ -1,0 +1,2 @@
+/usr/bin/ar qc libvision_system.a  CMakeFiles/vision_system.dir/src/vision_system.cpp.o
+/usr/bin/ranlib libvision_system.a

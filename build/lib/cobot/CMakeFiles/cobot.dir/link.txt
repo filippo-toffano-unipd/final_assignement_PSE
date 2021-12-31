@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcobot.a  CMakeFiles/cobot.dir/src/cobot.cpp.o
+/usr/bin/ranlib libcobot.a

@@ -8,6 +8,7 @@ using std::string;
 #include <mutex>
 using std::mutex;
 using std::unique_lock;
+#include <condition_variable>
 
 #include "piece.h"
 #include "box.h"
@@ -28,12 +29,16 @@ Box::Box(const Box &box_to_copy)
 void Box::load_piece(const Piece &object_box){
     // Oprazione di mutua esclusione
     unique_lock<mutex> mlock(mtx_box_);
+    while(output_box_.size() >= box_capacity){
+        box_not_full_.wait(mlock);
+    }
     output_box_.push_back(object_box);
-    mlock.unlock();
+    mlock.unlock(); 
 }
 
 // Pulizia della scatola dopo essere stata messa in magazzino:
 void Box::clear_box(){ 
     output_box_.clear(); 
     box_ID_ ++;
+    box_not_full_.notify_one();
 }
