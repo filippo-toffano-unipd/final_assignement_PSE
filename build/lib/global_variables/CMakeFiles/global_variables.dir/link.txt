@@ -1,2 +1,0 @@
-/usr/bin/ar qc libglobal_variables.a  CMakeFiles/global_variables.dir/src/global_variables.cpp.o
-/usr/bin/ranlib libglobal_variables.a

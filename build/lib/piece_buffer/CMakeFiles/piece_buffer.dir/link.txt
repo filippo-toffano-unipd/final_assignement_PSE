@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpiece_buffer.a  CMakeFiles/piece_buffer.dir/src/piece_buffer.cpp.o
-/usr/bin/ranlib libpiece_buffer.a
