@@ -21,8 +21,6 @@ using std::queue;
 #include "piece.h"
 #include "piece_buffer.h"
 
-//PieceBuffer piece_queue_line1;
-
 void vision_system_thread_main(string file_path){
 
     ifstream input_file_a(file_path); // file da cui estratte i dati di input linea 1

@@ -10,6 +10,6 @@ add_library(piece STATIC src/piece.cpp)
 
 target_include_directories(piece
         PUBLIC include
-        )
+)
 
 add_library(PSE::piece ALIAS piece)

@@ -7,9 +7,12 @@ project( main_application
 add_executable(application src/main.cpp)
 
 target_link_libraries(application
-    PUBLIC PSE::piece
-    PUBLIC PSE::box
-    PUBLIC PSE::store
-    PUBLIC PSE::vision_system
-    PUBLIC PSE::piece_buffer
+    PRIVATE PSE::piece
+    PRIVATE PSE::box
+    PRIVATE PSE::store
+    PRIVATE PSE::vision_system
+    PRIVATE PSE::piece_buffer
+    PRIVATE PSE::cobot
+    PRIVATE PSE::global_variables
+    PRIVATE pthread
 )

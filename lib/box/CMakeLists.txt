@@ -9,6 +9,7 @@ add_library(box STATIC src/box.cpp)
 
 target_link_libraries( box
         PUBLIC PSE::piece
+        PUBLIC PSE::global_variables
 )
 
 target_include_directories(box

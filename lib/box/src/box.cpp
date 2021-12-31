@@ -12,17 +12,18 @@ using std::unique_lock;
 #include "piece.h"
 #include "box.h"
 
-
-
 Box::Box()
     :   box_ID_{0}
 {}
 
 Box::Box(uint box_ID)
     :   box_ID_{box_ID}
-{
-}
+{}
 
+Box::Box(const Box &box_to_copy)
+    :   box_ID_{box_to_copy.box_ID_},
+        output_box_{box_to_copy.output_box_}
+{}
 void Box::load_piece(const Piece &object_box){
     // Oprazione di mutua esclusione
     unique_lock<mutex> mlock(mtx_box_);

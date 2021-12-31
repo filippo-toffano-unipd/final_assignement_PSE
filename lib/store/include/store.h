@@ -1,24 +1,30 @@
 // store.h
-/*
+
 #ifndef STORE_H
 #define STORE_H
 
 #include "piece.h"
 #include "box.h"
+#include "global_variables.h"
+
 #include <string>
 using std::string;
 
+#include <list>
+using std::list;
+
+#include <mutex> 
+using std::mutex;
+
 class Store{
     public:
-        Store();    // default constructor
-        Store(Box box_info, uint storage); // class constructor 
-        Box box_info() const { return box_info_; }
-        uint storage() const { return storage_;}
+        void append_box(const Box box_to_store);
+        Box take_box();
     
     private:
-        Box box_info_;   // information about box
-        uint storage_;   // number of storage box
+        list<Box> box_in_store_;
+        mutex mtx_store_;
 };
 
 #endif
-*/
+

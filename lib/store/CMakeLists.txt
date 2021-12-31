@@ -15,6 +15,7 @@ target_include_directories(store
 target_link_libraries( store
         PUBLIC PSE::piece
         PUBLIC PSE::box
+        PUBLIC PSE::global_variables
 )
 
 add_library(PSE::store ALIAS store)

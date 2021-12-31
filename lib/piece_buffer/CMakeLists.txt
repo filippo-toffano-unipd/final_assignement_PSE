@@ -14,6 +14,7 @@ target_include_directories( piece_buffer
         
 target_link_libraries( piece_buffer
         PUBLIC PSE::piece
+        PUBLIC PSE::global_variables
 )
 
 add_library(PSE::piece_buffer ALIAS piece_buffer)

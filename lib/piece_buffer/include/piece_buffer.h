@@ -23,6 +23,7 @@ class PieceBuffer{
     public:
         void append_piece(const Piece &piece);
         Piece take_piece();
+        bool is_empty() { return output_queue_.empty(); }
 
     private:
         queue<Piece> output_queue_;

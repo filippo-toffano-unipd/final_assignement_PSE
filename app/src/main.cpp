@@ -22,6 +22,7 @@ using std::queue;
 #include "piece_buffer.h"
 #include "vision_system.h"
 #include "piece.h"
+#include "cobot.h"
 
 // Global Variable:
 PieceBuffer piece_queue_line1;
