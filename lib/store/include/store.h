@@ -18,7 +18,7 @@ using std::mutex;
 
 class Store{
     public:
-        void append_box(const Box box_to_store);
+        void append_box();
         Box take_box();
     
     private:

@@ -11,6 +11,7 @@ using std::unique_lock;
 
 #include "piece.h"
 #include "box.h"
+#include "global_variables.h"
 
 Box::Box()
     :   box_ID_{0}
@@ -29,4 +30,10 @@ void Box::load_piece(const Piece &object_box){
     unique_lock<mutex> mlock(mtx_box_);
     output_box_.push_back(object_box);
     mlock.unlock();
+}
+
+// Pulizia della scatola dopo essere stata messa in magazzino:
+void Box::clear_box(){ 
+    output_box_.clear(); 
+    box_ID_ ++;
 }

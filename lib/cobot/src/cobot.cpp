@@ -8,7 +8,7 @@ void get_piece_to_box(const uint id_box){
     while(function){
     Piece piece_to_box = piece_queue_line1.take_piece();
     // spostamento nella scatola del pezzo afferato
-    destination_box.load_piece(piece_to_box);
+    store_box.load_piece(piece_to_box);
 
     if(piece_queue_line1.is_empty() /*&& file di imput è finito*/)
         function = false;

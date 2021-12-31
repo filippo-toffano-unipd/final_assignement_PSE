@@ -11,8 +11,6 @@ using std::mutex;
 
 #include "piece.h"
 
-uint const box_capacity = 10;
-
 class Box{
     public:
         Box();  // default constructor 
@@ -20,6 +18,7 @@ class Box{
         Box(const Box &box_to_copy);
         uint box_ID() const { return box_ID_; }
         void load_piece(const Piece &object_box);
+        void clear_box();
 
     private:
         uint box_ID_;       // box identifier
