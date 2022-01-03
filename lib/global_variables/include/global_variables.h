@@ -7,7 +7,7 @@
 #include "box.h"
 #include "piece_buffer.h"
 
-extern int conveyor_width;
+extern uint conveyor_width;
 extern PieceBuffer piece_queue_line1;
 extern Box store_box;
 extern uint const box_capacity;

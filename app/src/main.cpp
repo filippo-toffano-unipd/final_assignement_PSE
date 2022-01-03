@@ -34,11 +34,12 @@ int main(int argc, char* argv[]){
     const string file_b{"../arrivi_linea_b.txt"};
 
     // Acquisizione start time per simulazione:
-    system_clock::time_point start_time = system_clock::now();
+    auto start_time = high_resolution_clock::now();
     
 
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time};
+    // threas cobot_A {};
     //thread vision_B {vision_systrem_thread_main, file b, start_time};
     vision_A.join();
     //vision_B.join();

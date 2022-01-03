@@ -31,23 +31,21 @@ using std::thread;
 void vision_system_thread_main(string file_path, system_clock::time_point start_time){
 
     ifstream input_file(file_path); // file da cui estratte i dati di input linea 1
-    auto sleep_time = 0;
 
     do{
         string input_line1 = read_input_file(input_file);
-        system_clock::time_point time = system_clock::now();
+        auto time = high_resolution_clock::now();
         // Separazione degli elementi:
         vector<string> split = split_input_element(input_line1);
         // Creazione pezzo:
         Piece pezzo(static_cast<uint>(std::stoul(split[0])), static_cast<uint>(std::stoul(split[1])), split[2], std::stof(split[3]));
         uint time_piece = get_total_sec(pezzo.get_min(), pezzo.get_sec());
-        milliseconds diff_time = duration_cast<seconds>(time - start_time);
-        sleep_time = time_piece - diff_time.count();
+        milliseconds diff_time = duration_cast<milliseconds>(time - start_time) ;
+        uint sleep_time = time_piece - diff_time.count();
         std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
     
-        
         piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi (conveyor della linea)
-        cout << "Preso pezzo e aggiunto in coda " << sleep_time << "s" << endl;
+        cout << "Preso pezzo e aggiunto in coda " << time_piece << "s" << endl;
 
     }while(!input_file.eof());
 
