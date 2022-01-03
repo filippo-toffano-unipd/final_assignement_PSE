@@ -23,6 +23,8 @@ using namespace std::chrono;
 #include <thread>
 using std::thread;
 
+#include <csignal>
+
 #include "vision_system.h"
 #include "piece.h"
 #include "piece_buffer.h"
@@ -33,10 +35,10 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
     ifstream input_file(file_path); // file da cui estratte i dati di input linea 1
 
     do{
-        string input_line1 = read_input_file(input_file);
+        string input_line = read_input_file(input_file);
         auto time = high_resolution_clock::now();
         // Separazione degli elementi:
-        vector<string> split = split_input_element(input_line1);
+        vector<string> split = split_input_element(input_line);
         // Creazione pezzo:
         Piece pezzo(static_cast<uint>(std::stoul(split[0])), static_cast<uint>(std::stoul(split[1])), split[2], std::stof(split[3]));
         uint time_piece = get_total_sec(pezzo.get_min(), pezzo.get_sec());
@@ -48,8 +50,7 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
         cout << "Rilevato pezzo e posto in coda" << endl;
         mutex_cout.unlock();
         
-
-    }while(!input_file.eof());
+    }while(!(input_file.eof() || kill_system));
 
     // Chiusura input file:
     cout << "VISION CHIUSA" << endl;
@@ -92,5 +93,7 @@ vector<string> split_input_element(string line_to_split){
 }
 
 void halt_system(){
-    kill_system = true;
+    signal(SIGINT, [](int){
+        cout << "    GRACEFUL DEGRADATION" << endl;
+        kill_system = true;});
 }

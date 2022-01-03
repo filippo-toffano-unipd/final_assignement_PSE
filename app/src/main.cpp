@@ -22,8 +22,6 @@ using std::queue;
 #include <chrono>
 using namespace std::chrono;
 
-#include <csignal>
-
 #include "piece_buffer.h"
 #include "vision_system.h"
 #include "piece.h"
@@ -42,11 +40,12 @@ int main(int argc, char* argv[]){
     thread vision_A {vision_system_thread_main, file_a, start_time};
     thread cobot_A {get_piece_to_box, 1};
     thread agv_storage{agv_transport};
-    thread stop_system{};
+    thread stop_system{halt_system};
     //thread vision_B {vision_systrem_thread_main, file b, start_time};
     vision_A.join();
     cobot_A.join();
     agv_storage.join();
+    stop_system.join();
     //vision_B.join();
     
     
