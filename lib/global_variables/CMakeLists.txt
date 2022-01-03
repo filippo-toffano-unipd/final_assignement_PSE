@@ -17,6 +17,7 @@ target_link_libraries( global_variables
         PUBLIC PSE::piece_buffer
         PUBLIC PSE::box
         PUBLIC PSE::vision_system
+        PUBLIC PSE::store
 )
 
 add_library(PSE::global_variables ALIAS global_variables)

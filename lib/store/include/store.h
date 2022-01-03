@@ -5,7 +5,6 @@
 
 #include "piece.h"
 #include "box.h"
-#include "global_variables.h"
 
 #include <string>
 using std::string;
@@ -26,5 +25,6 @@ class Store{
         mutex mtx_store_;
 };
 
+void agv_transport();
 #endif
 

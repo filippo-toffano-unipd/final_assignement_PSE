@@ -5,6 +5,6 @@
 #include "box.h"
 #include "global_variables.h"
 
-void get_piece_to_box(const uint id_box);
+void get_piece_to_box(const uint id_cobot);
 
 #endif

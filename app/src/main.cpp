@@ -22,12 +22,14 @@ using std::queue;
 #include <chrono>
 using namespace std::chrono;
 
+#include <csignal>
+
 #include "piece_buffer.h"
 #include "vision_system.h"
 #include "piece.h"
 #include "cobot.h"
+#include "store.h"
 
-//il main vuole dei CHAR !!!!!!!!
 int main(int argc, char* argv[]){
     // Locazione dei file di input:
     const string file_a{"../arrivi_linea_a.txt"};
@@ -36,12 +38,15 @@ int main(int argc, char* argv[]){
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
     
-
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time};
-    // threas cobot_A {};
+    thread cobot_A {get_piece_to_box, 1};
+    thread agv_storage{agv_transport};
+    thread stop_system{};
     //thread vision_B {vision_systrem_thread_main, file b, start_time};
     vision_A.join();
+    cobot_A.join();
+    agv_storage.join();
     //vision_B.join();
     
     

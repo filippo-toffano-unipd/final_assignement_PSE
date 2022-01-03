@@ -26,10 +26,13 @@ Box::Box(const Box &box_to_copy)
     :   box_ID_{box_to_copy.box_ID_},
         output_box_{box_to_copy.output_box_}
 {}
+
 void Box::load_piece(const Piece &object_box){
     // Oprazione di mutua esclusione
     unique_lock<mutex> mlock(mtx_box_);
+    std::cout<< endl << output_box_.size() << endl;
     while(output_box_.size() >= box_capacity){
+        box_is_full_.notify_one();
         box_not_full_.wait(mlock);
     }
     output_box_.push_back(object_box);
@@ -37,8 +40,21 @@ void Box::load_piece(const Piece &object_box){
 }
 
 // Pulizia della scatola dopo essere stata messa in magazzino:
-void Box::clear_box(){ 
+Box Box::clear_box(){ 
+    unique_lock<mutex> mlock(mtx_box_);
+    while(output_box_.size() < box_capacity && (cobotA_run || cobotB_run)){
+        mutex_cout.lock();
+        std::cout << "SCATOLA NON PIENA"<< endl;
+        mutex_cout.unlock();
+        box_is_full_.wait(mlock);
+    }
+    Box tmp_box{*this};
     output_box_.clear(); 
-    box_ID_ ++;
+    std::cout << output_box_.size() << std::endl;
     box_not_full_.notify_one();
+    return tmp_box;
+}
+
+bool Box::is_empty(){
+    return output_box_.empty();
 }

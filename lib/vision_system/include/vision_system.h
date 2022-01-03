@@ -30,4 +30,6 @@ string read_input_file(ifstream &input_file);
 // Funzione per separare gli elementi estratti dai file di input
 vector<string> split_input_element(string string_to_split);
 
+// Funzione di arresto impianto:
+void halt_system();
 #endif

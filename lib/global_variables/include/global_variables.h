@@ -6,10 +6,19 @@
 #include "vision_system.h"
 #include "box.h"
 #include "piece_buffer.h"
+#include "store.h"
+#include <mutex>
+using std::mutex;
 
 extern uint conveyor_width;
 extern PieceBuffer piece_queue_line1;
+extern PieceBuffer piece_queue_line2;
 extern Box store_box;
 extern uint const box_capacity;
-
+extern bool end_file;
+extern Store storage;
+extern bool cobotA_run;
+extern bool cobotB_run;
+extern mutex mutex_cout;
+extern bool kill_system;
 #endif

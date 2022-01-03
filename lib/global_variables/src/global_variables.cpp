@@ -4,6 +4,12 @@
 
 uint conveyor_width{10}; //larghezza conveyor: supposta uguale per entrambi i conveyor delle 2 linee
 PieceBuffer piece_queue_line1;
-//Box store_box{};
-
+PieceBuffer piece_queue_line2;
+Box store_box{};
+bool end_file = false;
 uint const box_capacity = 10;
+Store storage{};
+bool cobotA_run = true;
+bool cobotB_run = false;
+mutex mutex_cout;
+bool kill_system = false;

@@ -40,18 +40,21 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
         // Creazione pezzo:
         Piece pezzo(static_cast<uint>(std::stoul(split[0])), static_cast<uint>(std::stoul(split[1])), split[2], std::stof(split[3]));
         uint time_piece = get_total_sec(pezzo.get_min(), pezzo.get_sec());
-        milliseconds diff_time = duration_cast<milliseconds>(time - start_time) ;
+        seconds diff_time = duration_cast<seconds>(time - start_time) ;
         uint sleep_time = time_piece - diff_time.count();
-        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
-    
+        std::this_thread::sleep_for(std::chrono::seconds(sleep_time));
         piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi (conveyor della linea)
-        cout << "Preso pezzo e aggiunto in coda " << time_piece << "s" << endl;
+        mutex_cout.lock();
+        cout << "Rilevato pezzo e posto in coda" << endl;
+        mutex_cout.unlock();
+        
 
     }while(!input_file.eof());
 
     // Chiusura input file:
+    cout << "VISION CHIUSA" << endl;
     input_file.close();
-
+    end_file = true;
 }
 
 
@@ -86,4 +89,8 @@ vector<string> split_input_element(string line_to_split){
     }
 
     return split_line;
+}
+
+void halt_system(){
+    kill_system = true;
 }
