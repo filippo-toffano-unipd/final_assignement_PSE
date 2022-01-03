@@ -14,12 +14,15 @@ using std::vector;
 #include <string>
 using std::string; 
 
+#include <chrono>
+using namespace std::chrono;
+
 #include "piece_buffer.h"
 #include "global_variables.h"
 
 
 // Thread main program
-void vision_system_thread_main(string file_path);
+void vision_system_thread_main(string file_path, system_clock::time_point start_time);
 
 // Funzione lettura dati input linea 
 string read_input_file(ifstream &input_file);

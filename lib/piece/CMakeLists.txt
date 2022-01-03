@@ -12,4 +12,8 @@ target_include_directories(piece
         PUBLIC include
 )
 
+target_link_libraries( piece
+        PUBLIC PSE::global_variables
+)
+
 add_library(PSE::piece ALIAS piece)

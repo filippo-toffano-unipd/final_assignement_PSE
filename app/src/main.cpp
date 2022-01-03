@@ -19,32 +19,29 @@ using std::thread;
 #include <queue>
 using std::queue;
 
+#include <chrono>
+using namespace std::chrono;
+
 #include "piece_buffer.h"
 #include "vision_system.h"
 #include "piece.h"
 #include "cobot.h"
 
-// Global Variable:
-PieceBuffer piece_queue_line1;
-
-int main(){
-    // Estrazione contenuti da input files
+//il main vuole dei CHAR !!!!!!!!
+int main(int argc, char* argv[]){
+    // Locazione dei file di input:
     const string file_a{"../arrivi_linea_a.txt"};
     const string file_b{"../arrivi_linea_b.txt"};
 
+    // Acquisizione start time per simulazione:
+    system_clock::time_point start_time = system_clock::now();
+    
 
-    vision_system_thread_main(file_b);
-    cout << endl;
-    for(int i = 0; i < 15; i++){
-        //cout << "- " << piece_queue_line1.take_piece().get_min();
-        //cout << " " << piece_queue_line1.take_piece().get_sec();
-        //cout << " " << piece_queue_line1.take_piece().get_piece_type();
-        cout << " " << piece_queue_line1.take_piece().get_pos() << endl;
-    }
-
-/*
-    thread thread_line1{};
-    thread thread_line2{};
-*/
-
+    // THREAD:
+    thread vision_A {vision_system_thread_main, file_a, start_time};
+    //thread vision_B {vision_systrem_thread_main, file b, start_time};
+    vision_A.join();
+    //vision_B.join();
+    
+    
 }
