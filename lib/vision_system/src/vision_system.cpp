@@ -30,8 +30,9 @@ using std::thread;
 #include "piece_buffer.h"
 #include "global_variables.h"
 
-void vision_system_thread_main(string file_path, system_clock::time_point start_time){
+void vision_system_thread_main(string file_path, system_clock::time_point start_time, bool ID_line){
 
+    uint SF = 10; // scale factor per velocizzare l'esecuzione del programma
     ifstream input_file(file_path); // file da cui estratte i dati di input linea 1
 
     do{
@@ -44,12 +45,20 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
         uint time_piece = get_total_sec(pezzo.get_min(), pezzo.get_sec());
         seconds diff_time = duration_cast<seconds>(time - start_time) ;
         uint sleep_time = time_piece - diff_time.count();
-        std::this_thread::sleep_for(std::chrono::seconds(sleep_time));
-        piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi (conveyor della linea)
-        mutex_cout.lock();
-        cout << "Rilevato pezzo e posto in coda" << endl;
-        mutex_cout.unlock();
+        std::this_thread::sleep_for(std::chrono::seconds(sleep_time/SF));
         
+        // Smistamento pezzi nelle corrispondenti code (conveyor delle linee):
+        if(ID_line){
+            mutex_cout.lock();
+            cout << "Rilevato pezzo e posto in coda A" << endl;
+            mutex_cout.unlock();
+            piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
+        }else{
+            mutex_cout.lock();
+            cout << "Rilevato pezzo e posto in coda B" << endl;
+            mutex_cout.unlock();
+            piece_queue_line2.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
+        }  
     }while(!(input_file.eof() || kill_system));
 
     // Chiusura input file:

@@ -35,18 +35,23 @@ int main(int argc, char* argv[]){
 
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
-    
+    /*  Identifier vision system line:  
+    *   line A --> TRUE;
+    *   line B --> FALSE;
+    */
     // THREAD:
-    thread vision_A {vision_system_thread_main, file_a, start_time};
+    thread vision_A {vision_system_thread_main, file_a, start_time, true};
+    thread vision_B {vision_system_thread_main, file_b, start_time, false};
     thread cobot_A {get_piece_to_box, 1};
+    // thread cobot_B {get_piece_to_box, 2};
     thread agv_storage{agv_transport};
     thread stop_system{halt_system};
-    //thread vision_B {vision_systrem_thread_main, file b, start_time};
+    
+    // Lancio delle thread:
     vision_A.join();
+    vision_B.join();
     cobot_A.join();
+    // cobot_B.join();
     agv_storage.join();
     stop_system.join();
-    //vision_B.join();
-    
-    
 }

@@ -30,7 +30,6 @@ Box::Box(const Box &box_to_copy)
 void Box::load_piece(const Piece &object_box){
     // Oprazione di mutua esclusione
     unique_lock<mutex> mlock(mtx_box_);
-    std::cout<< endl << output_box_.size() << endl;
     while(output_box_.size() >= box_capacity){
         box_is_full_.notify_one();
         box_not_full_.wait(mlock);
@@ -50,7 +49,6 @@ Box Box::clear_box(){
     }
     Box tmp_box{*this};
     output_box_.clear(); 
-    std::cout << output_box_.size() << std::endl;
     box_not_full_.notify_one();
     return tmp_box;
 }
