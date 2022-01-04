@@ -21,8 +21,10 @@ void Store::append_box(){
 void agv_transport(){
     bool agv_run = true;
     while(agv_run){
-        storage.append_box();
+        mutex_cout.lock();
         std::cout << "AGV" << std::endl;
+        mutex_cout.unlock();
+        storage.append_box();
         if(!(cobotA_run || cobotB_run) && store_box.is_empty())
             agv_run = false;
     }

@@ -2,6 +2,7 @@
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::stoul;
 
 #include <fstream> 
 using std::ifstream;
@@ -40,14 +41,14 @@ int main(int argc, char* argv[]){
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
 
-    /*  Identifier vision system line:  
-    *   line A --> A;
-    *   line B --> B;
-    */
+    /*  Identifier vision system line:          *   Identifier cobot system line: 
+    *   line A --> A;                           *   line A --> A;
+    *   line B --> B;                           *   line B --> B;
+    *                                           */
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time, 'A'};
     thread vision_B {vision_system_thread_main, file_b, start_time, 'B'};
-    thread cobot_A {get_piece_to_box, 'A', std::stof(argv[1]), std::stof(argv[2]), start_time};
+    thread cobot_A {get_piece_to_box, 'A', static_cast<uint>(stoul(argv[1])), static_cast<uint>(stoul(argv[2])), start_time};
     thread cobot_B {get_piece_to_box, 'B', std::stof(argv[3]), std::stof(argv[4]), start_time};
     thread agv_storage{agv_transport};
     thread stop_system{halt_system};

@@ -50,16 +50,10 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
         switch (ID_line)
         {
             case 'A':
-                mutex_cout.lock();
-                cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
-                mutex_cout.unlock();
                 piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
                 break;
             
-            case 'B':
-                mutex_cout.lock();
-                cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
-                mutex_cout.unlock();
+            case 'B':                
                 piece_queue_line2.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
                 break;
                 
@@ -72,8 +66,11 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
 
     // Chiusura input file:
     cout << "VISION " << ID_line << " CHIUSA" << endl;
+    if(end_one_file)
+        end_one_file = false;
+    else 
+        end_all_file = true;
     input_file.close();
-    end_file = true;
 }
 
 
@@ -112,6 +109,8 @@ vector<string> split_input_element(string line_to_split){
 
 void halt_system(){
     signal(SIGINT, [](int){
+        mutex_cout.lock();
         cout << "    GRACEFUL DEGRADATION" << endl;
+        mutex_cout.unlock();
         kill_system = true;});
 }

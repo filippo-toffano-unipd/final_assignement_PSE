@@ -42,9 +42,6 @@ void Box::load_piece(const Piece &object_box){
 Box Box::clear_box(){ 
     unique_lock<mutex> mlock(mtx_box_);
     while(output_box_.size() < box_capacity && (cobotA_run || cobotB_run)){
-        mutex_cout.lock();
-        std::cout << "SCATOLA NON PIENA"<< endl;
-        mutex_cout.unlock();
         box_is_full_.wait(mlock);
     }
     Box tmp_box{*this};
