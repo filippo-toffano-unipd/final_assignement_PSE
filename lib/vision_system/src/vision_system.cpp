@@ -26,13 +26,12 @@ using std::thread;
 #include <csignal>
 
 #include "vision_system.h"
-#include "piece.h"
+#include "piece.h" 
 #include "piece_buffer.h"
 #include "global_variables.h"
 
 void vision_system_thread_main(string file_path, system_clock::time_point start_time, char ID_line){
 
-    uint SF = 10; // scale factor per velocizzare l'esecuzione del programma
     ifstream input_file(file_path); // file da cui estratte i dati di input linea 1
 
     do{
@@ -42,27 +41,37 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
         vector<string> split = split_input_element(input_line);
         // Creazione pezzo:
         Piece pezzo(static_cast<uint>(std::stoul(split[0])), static_cast<uint>(std::stoul(split[1])), split[2], std::stof(split[3]));
-        uint time_piece = get_total_sec(pezzo.get_min(), pezzo.get_sec());
-        seconds diff_time = duration_cast<seconds>(time - start_time) ;
+        uint time_piece = 1000 * (get_total_sec(pezzo.get_min(), pezzo.get_sec())) / SF;
+        milliseconds diff_time = duration_cast<milliseconds>(time - start_time);
         uint sleep_time = time_piece - diff_time.count();
-        std::this_thread::sleep_for(std::chrono::seconds(sleep_time/SF));
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
         
         // Smistamento pezzi nelle corrispondenti code (conveyor delle linee):
-        if(ID_line == 'A' || ID_line == 'a'){
-            mutex_cout.lock();
-            cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
-            mutex_cout.unlock();
-            piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
-        }else if(ID_line == 'B' || ID_line == 'b'){
-            mutex_cout.lock();
-            cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
-            mutex_cout.unlock();
-            piece_queue_line2.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
-        }  
+        switch (ID_line)
+        {
+            case 'A':
+                mutex_cout.lock();
+                cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
+                mutex_cout.unlock();
+                piece_queue_line1.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
+                break;
+            
+            case 'B':
+                mutex_cout.lock();
+                cout << "Rilevato pezzo e posto in coda " << ID_line << endl;
+                mutex_cout.unlock();
+                piece_queue_line2.append_piece(pezzo); // aggiunta del pezzo alla coda dei pezzi della line 1 (conveyor della linea 1)
+                break;
+                
+            default:
+                cerr << "ERROR SYSTEM!" << endl;
+                exit(EXIT_FAILURE);
+                break;
+        }
     }while(!(input_file.eof() || kill_system));
 
     // Chiusura input file:
-    cout << "VISION CHIUSA" << endl;
+    cout << "VISION " << ID_line << " CHIUSA" << endl;
     input_file.close();
     end_file = true;
 }

@@ -21,4 +21,5 @@ extern bool cobotA_run;
 extern bool cobotB_run;
 extern mutex mutex_cout;
 extern bool kill_system;
+extern uint const SF; 
 #endif

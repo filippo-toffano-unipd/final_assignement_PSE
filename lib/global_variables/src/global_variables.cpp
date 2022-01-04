@@ -13,3 +13,6 @@ bool cobotA_run = true;
 bool cobotB_run = false;
 mutex mutex_cout;
 bool kill_system = false;
+
+// Settaggio scale factor per velocizzare l'esecuzione del programma:
+uint const SF = 100; 

@@ -1,6 +1,4 @@
 #include <iostream>
-using std::cin;
-using std::cerr;
 using std::cout;
 using std::endl;
 
@@ -35,6 +33,7 @@ int main(int argc, char* argv[]){
 
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
+
     /*  Identifier vision system line:  
     *   line A --> A;
     *   line B --> B;
@@ -42,8 +41,8 @@ int main(int argc, char* argv[]){
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time, 'A'};
     thread vision_B {vision_system_thread_main, file_b, start_time, 'B'};
-    thread cobot_A {get_piece_to_box, 1};
-    // thread cobot_B {get_piece_to_box, 2};
+    thread cobot_A {get_piece_to_box, 'A'};
+    thread cobot_B {get_piece_to_box, 'B'};
     thread agv_storage{agv_transport};
     thread stop_system{halt_system};
     
@@ -51,7 +50,7 @@ int main(int argc, char* argv[]){
     vision_A.join();
     vision_B.join();
     cobot_A.join();
-    // cobot_B.join();
+    cobot_B.join();
     agv_storage.join();
     stop_system.join();
 }
