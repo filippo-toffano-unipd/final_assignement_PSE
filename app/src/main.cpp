@@ -1,5 +1,6 @@
 #include <iostream>
 using std::cout;
+using std::cerr;
 using std::endl;
 
 #include <fstream> 
@@ -27,6 +28,11 @@ using namespace std::chrono;
 #include "store.h"
 
 int main(int argc, char* argv[]){
+
+    if( argc < 5){
+        cerr << "ERROR PARAMETERS INSERT" << endl;
+        exit(EXIT_FAILURE);
+    }
     // Locazione dei file di input:
     const string file_a{"../arrivi_linea_a.txt"};
     const string file_b{"../arrivi_linea_b.txt"};
@@ -41,8 +47,8 @@ int main(int argc, char* argv[]){
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time, 'A'};
     thread vision_B {vision_system_thread_main, file_b, start_time, 'B'};
-    thread cobot_A {get_piece_to_box, 'A'};
-    thread cobot_B {get_piece_to_box, 'B'};
+    thread cobot_A {get_piece_to_box, 'A', std::stof(argv[1]), std::stof(argv[2]), start_time};
+    thread cobot_B {get_piece_to_box, 'B', std::stof(argv[3]), std::stof(argv[4]), start_time};
     thread agv_storage{agv_transport};
     thread stop_system{halt_system};
     
