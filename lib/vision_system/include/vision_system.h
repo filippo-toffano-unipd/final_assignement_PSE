@@ -22,7 +22,7 @@ using namespace std::chrono;
 
 
 // Thread main program
-void vision_system_thread_main(string file_path, system_clock::time_point start_time, bool ID_line);
+void vision_system_thread_main(string file_path, system_clock::time_point start_time, char ID_line);
 
 // Funzione lettura dati input linea 
 string read_input_file(ifstream &input_file);

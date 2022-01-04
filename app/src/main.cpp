@@ -36,12 +36,12 @@ int main(int argc, char* argv[]){
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
     /*  Identifier vision system line:  
-    *   line A --> TRUE;
-    *   line B --> FALSE;
+    *   line A --> A;
+    *   line B --> B;
     */
     // THREAD:
-    thread vision_A {vision_system_thread_main, file_a, start_time, true};
-    thread vision_B {vision_system_thread_main, file_b, start_time, false};
+    thread vision_A {vision_system_thread_main, file_a, start_time, 'A'};
+    thread vision_B {vision_system_thread_main, file_b, start_time, 'B'};
     thread cobot_A {get_piece_to_box, 1};
     // thread cobot_B {get_piece_to_box, 2};
     thread agv_storage{agv_transport};
