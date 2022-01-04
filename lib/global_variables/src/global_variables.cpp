@@ -6,8 +6,8 @@ uint conveyor_width{10}; //larghezza conveyor: supposta uguale per entrambi i co
 PieceBuffer piece_queue_line1;
 PieceBuffer piece_queue_line2;
 Box store_box{};
-bool end_all_file = false;
-bool end_one_file = true;
+bool end_file_A = false ;
+bool end_file_B = false;
 uint const box_capacity = 10;
 Store storage{};
 bool cobotA_run = true;
@@ -16,4 +16,4 @@ mutex mutex_cout;
 bool kill_system = false;
 
 // Settaggio scale factor per velocizzare l'esecuzione del programma:
-uint const SF = 100; 
+uint const SF = 50; 

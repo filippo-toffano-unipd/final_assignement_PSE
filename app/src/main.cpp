@@ -60,4 +60,6 @@ int main(int argc, char* argv[]){
     cobot_B.join();
     agv_storage.join();
     stop_system.join();
+
+    return 0;
 }

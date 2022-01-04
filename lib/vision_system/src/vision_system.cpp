@@ -65,11 +65,24 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
     }while(!(input_file.eof() || kill_system));
 
     // Chiusura input file:
+    mutex_cout.lock();
     cout << "VISION " << ID_line << " CHIUSA" << endl;
-    if(end_one_file)
-        end_one_file = false;
-    else 
-        end_all_file = true;
+    mutex_cout.unlock();
+    switch (ID_line)
+    {
+        case 'A':
+            end_file_A = true;
+            break;
+        
+        case 'B':
+            end_file_B = true;
+            break;
+
+        default:
+            cerr << "ERROR SYSTEM";
+            exit(EXIT_FAILURE);
+            break;
+        }
     input_file.close();
 }
 

@@ -25,9 +25,12 @@ void get_piece_to_box(const char ID_cobot, uint conveyor_lenght, uint conveyor_s
                     " al tempo " << piece_to_box.get_min() << "." << piece_to_box.get_sec() << " in posizione " <<
                     piece_to_box.get_pos() << endl;
                     mutex_cout.unlock();
-                    if(piece_queue_line1.is_empty() && end_all_file && cobotA_run){
+                    
+                    if(piece_queue_line1.is_empty() && end_file_A && cobotA_run){
                         cobotA_run = false;
-                        cout << "COBOT "<< ID_cobot << " OFF" << endl;
+                        mutex_cout.lock();
+                        cout << "COBOT "<< ID_cobot << " go to OFF" << endl;
+                        mutex_cout.unlock();
                     }
                     break;
 
@@ -38,9 +41,12 @@ void get_piece_to_box(const char ID_cobot, uint conveyor_lenght, uint conveyor_s
                     " al tempo " << piece_to_box.get_min() << "." << piece_to_box.get_sec() << " in posizione " <<
                     piece_to_box.get_pos() << endl;
                     mutex_cout.unlock();
-                    if(piece_queue_line2.is_empty() && end_all_file && cobotB_run){
+
+                    if(piece_queue_line2.is_empty() && end_file_B && cobotB_run){
                         cobotB_run = false;
-                        cout << "COBOT "<< ID_cobot << " OFF" << endl;
+                        mutex_cout.lock();
+                        cout << "COBOT "<< ID_cobot << " go to OFF" << endl;
+                        mutex_cout.unlock();
                     }
                     break;
 
