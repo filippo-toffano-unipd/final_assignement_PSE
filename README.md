@@ -34,4 +34,6 @@ cmake .. && make && ./app/application lunghezza_lineaA velocità_lineaA lunghezz
 
 Al posto dei parametri di lunghezza e velocità delle 2 linee, inserire dei valori INTERI. 
 
+
+*NOTA: nella `lib global_variables` è impostabile uno Scale Factor (SF) per poter accelerrare o rallentare l'esecuzione della simulazione*  
 =====================================================================================================================================================
