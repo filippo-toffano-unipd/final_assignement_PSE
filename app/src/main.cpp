@@ -28,6 +28,18 @@ using namespace std::chrono;
 #include "cobot.h"
 #include "store.h"
 
+/*  COUT << COLOR:
+*   black           \033[30m    \033[40m
+*   red             \033[31m    \033[41m
+*   green           \033[32m    \033[42m
+*   orange          \033[33m    \033[43m
+*   blue            \033[34m    \033[44m
+*   magenta         \033[35m    \033[45m
+*   cyan            \033[36m    \033[46m
+*   light grey      \033[37m    \033[47m
+*   default         \033[39m    \033[49m
+*/
+
 int main(int argc, char* argv[]){
 
     if( argc < 5){
@@ -55,10 +67,15 @@ int main(int argc, char* argv[]){
     
     // Lancio delle thread:
     vision_A.join();
-    vision_B.join();
+    cout << "CHIUSA VISION A fine" << endl;
     cobot_A.join();
+    cout << "CHIUSA COBOT A fine" << endl;
+    vision_B.join();
+    cout << "CHIUSA VISION B fine" << endl;
     cobot_B.join();
+    cout << "CHIUSA COBOT B fine" << endl;
     agv_storage.join();
+    cout << "CHIUSA AGV fine" << endl;
     stop_system.join();
 
     return 0;
