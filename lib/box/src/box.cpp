@@ -8,9 +8,7 @@ using std::string;
 #include <mutex>
 using std::mutex;
 using std::unique_lock;
-#include <condition_variable>
 
-#include "piece.h"
 #include "box.h"
 #include "global_variables.h"
 

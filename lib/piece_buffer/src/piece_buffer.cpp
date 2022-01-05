@@ -10,10 +10,8 @@ using std::unique_lock;
 
 #include <condition_variable>
 using std::condition_variable;
-#include <iostream>
-#include "global_variables.h"
+
 #include "piece_buffer.h"
-#include "piece.h"
 
 void PieceBuffer::append_piece(const Piece &object){
     // Oprazione di mutua esclusione

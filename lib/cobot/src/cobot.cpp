@@ -44,6 +44,7 @@ void get_piece_to_box_A(const char ID_cobot, uint conveyor_lenght, uint conveyor
         cout << piece_to_box.get_piece_type() << "\t inserito nella BOX" << endl;
         mutex_cout.unlock();
 
+        // SPegnimento cobot:
         if(piece_queue_line1.is_empty() && end_file_A){
             mutex_cout.lock();
             cout << "\033[31m" << "COBOT "<< ID_cobot << " go to OFF" << "\033[39m" << endl;
@@ -85,6 +86,7 @@ void get_piece_to_box_B(const char ID_cobot, uint conveyor_lenght, uint conveyor
         cout << piece_to_box.get_piece_type() << "\t inserito nella BOX" << endl;
         mutex_cout.unlock();
 
+        // Spegnimento cobot:
         if(piece_queue_line2.is_empty() && end_file_B){
             mutex_cout.lock();
             cout << "\033[31m" << "COBOT "<< ID_cobot << " go to OFF" << "\033[39m" << endl;
