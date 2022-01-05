@@ -63,7 +63,7 @@ int main(int argc, char* argv[]){
     thread cobot_A {get_piece_to_box, 'A', static_cast<uint>(stoul(argv[1])), static_cast<uint>(stoul(argv[2])), start_time};
     thread cobot_B {get_piece_to_box, 'B', static_cast<uint>(stoul(argv[3])), static_cast<uint>(stoul(argv[1])), start_time};
     thread agv_storage{agv_transport};
-    thread stop_system{halt_system};
+    // thread stop_system{halt_system};
     
     // Lancio delle thread:
     vision_A.join();
@@ -76,7 +76,7 @@ int main(int argc, char* argv[]){
     cout << "CHIUSA COBOT B fine" << endl;
     agv_storage.join();
     cout << "CHIUSA AGV fine" << endl;
-    stop_system.join();
+    // stop_system.join();
 
     return 0;
 }

@@ -15,15 +15,13 @@ void Store::append_box(){
     // AGV che trasferisce la scatola in magazzino
     unique_lock<mutex> mlock(mtx_store_);
     box_in_store_.push_back(store_box.clear_box());
+    std::cout << "AGV" << std::endl;
     mlock.unlock();
 }
 
 void agv_transport(){
     bool agv_run = true;
     while(agv_run){
-        mutex_cout.lock();
-        std::cout << "AGV" << std::endl;
-        mutex_cout.unlock();
         storage.append_box();
         if(!(cobotA_run || cobotB_run) && store_box.is_empty())
             agv_run = false;

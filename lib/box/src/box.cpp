@@ -45,7 +45,7 @@ Box Box::clear_box(){
         box_is_full_.wait(mlock);
     }
     Box tmp_box{*this};
-    output_box_.clear(); 
+    output_box_.clear();
     box_not_full_.notify_one();
     return tmp_box;
 }

@@ -30,14 +30,7 @@ void get_piece_to_box(const char ID_cobot, uint conveyor_lenght, uint conveyor_s
             uint time_piece = 1000 * (get_total_sec(piece_to_box.get_min(), piece_to_box.get_sec()) + (conveyor_lenght / conveyor_speed)) / SF;
             auto istant_time = high_resolution_clock::now();
             milliseconds gap_time = duration_cast<milliseconds>(istant_time - start_time);
-                    
-                if(time_piece >= gap_time.count()){
-                    sleep_time = time_piece - gap_time.count();
-                }
-                else{
-                    cerr << "ERROR SYNC TIME" << endl;
-                }
-                
+            sleep_time = time_piece - gap_time.count();
             std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
 
             // Posizionamento del pezzo nella scatola:
@@ -51,9 +44,9 @@ void get_piece_to_box(const char ID_cobot, uint conveyor_lenght, uint conveyor_s
                     
                     if(piece_queue_line1.is_empty() && end_file_A && cobotA_run){
                         mutex_cout.lock();
-                        cobotA_run = false;
                         cout << "COBOT "<< ID_cobot << " go to OFF" << endl;
                         mutex_cout.unlock();
+                        cobotA_run = false;
                     }
                     break;
 
