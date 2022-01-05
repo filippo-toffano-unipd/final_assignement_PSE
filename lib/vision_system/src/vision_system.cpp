@@ -82,7 +82,7 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
             cerr << "ERROR SYSTEM";
             exit(EXIT_FAILURE);
             break;
-        }
+    }
     input_file.close();
 }
 

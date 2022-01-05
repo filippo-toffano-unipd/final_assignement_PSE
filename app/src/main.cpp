@@ -60,23 +60,23 @@ int main(int argc, char* argv[]){
     // THREAD:
     thread vision_A {vision_system_thread_main, file_a, start_time, 'A'};
     thread vision_B {vision_system_thread_main, file_b, start_time, 'B'};
-    thread cobot_A {get_piece_to_box, 'A', static_cast<uint>(stoul(argv[1])), static_cast<uint>(stoul(argv[2])), start_time};
-    thread cobot_B {get_piece_to_box, 'B', static_cast<uint>(stoul(argv[3])), static_cast<uint>(stoul(argv[1])), start_time};
+    thread cobot_A {get_piece_to_box_A, 'A', static_cast<uint>(stoul(argv[1])), static_cast<uint>(stoul(argv[2])), start_time};
+    thread cobot_B {get_piece_to_box_B, 'B', static_cast<uint>(stoul(argv[3])), static_cast<uint>(stoul(argv[1])), start_time};
     thread agv_storage{agv_transport};
-    // thread stop_system{halt_system};
+    thread stop_system{halt_system};
     
     // Lancio delle thread:
     vision_A.join();
     cout << "CHIUSA VISION A fine" << endl;
-    cobot_A.join();
-    cout << "CHIUSA COBOT A fine" << endl;
     vision_B.join();
     cout << "CHIUSA VISION B fine" << endl;
+    cobot_A.join();
+    cout << "CHIUSA COBOT A fine" << endl;
     cobot_B.join();
     cout << "CHIUSA COBOT B fine" << endl;
     agv_storage.join();
     cout << "CHIUSA AGV fine" << endl;
-    // stop_system.join();
+    stop_system.join();
 
     return 0;
 }

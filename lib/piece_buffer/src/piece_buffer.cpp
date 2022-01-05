@@ -32,6 +32,7 @@ Piece PieceBuffer::take_piece(){
     
     Piece output = output_queue_.front();   // estraggo il primo pezzo dalla coda
     output_queue_.pop();                    // tolgo il primo pezzo dalla coda dopo averlo estratto
+    mlock.unlock();
     return output;                          // ritorno il pezzo estratto
 }
 
