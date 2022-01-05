@@ -46,8 +46,8 @@ int main(int argc, char* argv[]){
         exit(EXIT_FAILURE);
     }
     // Locazione dei file di input:
-    const string file_a{"../arrivi_linea_a.txt"};
-    const string file_b{"../arrivi_linea_b.txt"};
+    const string file_a{"../input_file/arrivi_linea_a.txt"};
+    const string file_b{"../input_file/arrivi_linea_b.txt"};
 
     // Acquisizione start time per simulazione:
     auto start_time = high_resolution_clock::now();
