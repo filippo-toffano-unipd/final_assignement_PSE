@@ -30,4 +30,6 @@ void agv_transport(){
         if(!(cobotA_run || cobotB_run) && store_box.is_empty())
             agv_run = false;
     }
+    cout << "\033[31m" << "AGV OFF" << "\033[39m" << endl;
+
 }
