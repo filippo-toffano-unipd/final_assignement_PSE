@@ -65,9 +65,6 @@ void vision_system_thread_main(string file_path, system_clock::time_point start_
     }while(!(input_file.eof() || kill_system));
 
     // Chiusura input file:
-    mutex_cout.lock();
-    cout << "VISION " << ID_line << " CHIUSA" << endl;
-    mutex_cout.unlock();
     switch (ID_line)
     {
         case 'A':
@@ -98,7 +95,7 @@ string read_input_file( ifstream &input_file ){
         exit(EXIT_FAILURE);
     }
 
-    // lettura riga per riga
+    // lettura riga per riga:
     getline(input_file, line);
     
     return line;
@@ -120,10 +117,12 @@ vector<string> split_input_element(string line_to_split){
     return split_line;
 }
 
+
+// GRACEFUL DEGRADATION: 
 void halt_system(){
     signal(SIGINT, [](int){
         mutex_cout.lock();
-        cout << "    GRACEFUL DEGRADATION" << endl;
+        cout << "\t\t\t" << "\033[33m" << "GRACEFUL DEGRADATION" << "\033[39m" << endl;
         mutex_cout.unlock();
         kill_system = true;});
 }

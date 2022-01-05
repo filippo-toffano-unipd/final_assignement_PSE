@@ -16,29 +16,29 @@ using namespace std::chrono;
 
 void get_piece_to_box_A(const char ID_cobot, uint conveyor_lenght, uint conveyor_speed, system_clock::time_point start_time)
 { 
+    uint add_time = conveyor_lenght / conveyor_speed;
+
     while(cobotA_run){
         Piece piece_to_box;
         uint sleep_time{0};
-            // Presa pezzo dal conveyor:
-            piece_to_box = piece_queue_line1.take_piece();
+        // Presa pezzo dal conveyor:
+        piece_to_box = piece_queue_line1.take_piece();
 
-            // Simulation:
-            uint time_piece = 1000 * (get_total_sec(piece_to_box.get_min(), piece_to_box.get_sec()) + (conveyor_lenght / conveyor_speed)) / SF;
-            auto istant_time = high_resolution_clock::now();
-            milliseconds gap_time = duration_cast<milliseconds>(istant_time - start_time);
-            sleep_time = time_piece - gap_time.count();
-            std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+        // Simulation:
+        uint time_piece = get_total_sec(piece_to_box.get_min(), piece_to_box.get_sec()) + add_time;
+        auto istant_time = high_resolution_clock::now();
+        milliseconds gap_time = duration_cast<milliseconds>(istant_time - start_time);
+        sleep_time = 1000 * time_piece / SF - gap_time.count();
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
 
-            // Posizionamento del pezzo nella scatola:
-        
-            mutex_cout.lock();
-            cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
-            " al tempo " << piece_to_box.get_min() << ":" << piece_to_box.get_sec() << " in posizione " <<
-            piece_to_box.get_pos() << endl;
-            mutex_cout.unlock();
-                    
-      
-        // spostamento nella scatola del pezzo afferato
+        // Posizionamento del pezzo nella scatola:
+        mutex_cout.lock();
+        cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
+        " al tempo " << calc_new_min(time_piece) << ":" << time_piece % 60 << " in posizione " <<
+        piece_to_box.get_pos() << endl;
+        mutex_cout.unlock();
+
+        // Spostamento nella scatola del pezzo afferato
         store_box.load_piece(piece_to_box);
         mutex_cout.lock();
         cout << piece_to_box.get_piece_type() << "\t inserito nella BOX" << endl;
@@ -46,41 +46,39 @@ void get_piece_to_box_A(const char ID_cobot, uint conveyor_lenght, uint conveyor
 
         if(piece_queue_line1.is_empty() && end_file_A){
             mutex_cout.lock();
-            cout << "COBOT "<< ID_cobot << " go to OFF" << endl;
+            cout << "\033[31m" << "COBOT "<< ID_cobot << " go to OFF" << "\033[39m" << endl;
             mutex_cout.unlock();
             cobotA_run = false;
         }
-
     }
-        store_box.last_piece();
 
-    cout << "COBOT A CHIUSA" << endl;
+    // Riporre in magazzino l'ultima scatola finiti i pezzi sulconveyor:
+    store_box.last_piece();
 }
 
 void get_piece_to_box_B(const char ID_cobot, uint conveyor_lenght, uint conveyor_speed, system_clock::time_point start_time)
 { 
+    uint add_time = conveyor_lenght / conveyor_speed;
     while(cobotB_run){
         Piece piece_to_box;
         uint sleep_time{0};
-            // Presa pezzo dal conveyor:
-            piece_to_box = piece_queue_line2.take_piece();
+        // Presa pezzo dal conveyor:
+        piece_to_box = piece_queue_line2.take_piece();
 
-            // Simulation:
-            uint time_piece = 1000 * (get_total_sec(piece_to_box.get_min(), piece_to_box.get_sec()) + (conveyor_lenght / conveyor_speed)) / SF;
-            auto istant_time = high_resolution_clock::now();
-            milliseconds gap_time = duration_cast<milliseconds>(istant_time - start_time);
-            sleep_time = time_piece - gap_time.count();
-            std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+        // Simulation:
+        uint time_piece = get_total_sec(piece_to_box.get_min(), piece_to_box.get_sec()) + add_time;
+        auto istant_time = high_resolution_clock::now();
+        milliseconds gap_time = duration_cast<milliseconds>(istant_time - start_time);
+        sleep_time = 1000 * time_piece / SF - gap_time.count();
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
 
-            // Posizionamento del pezzo nella scatola:
-        
-                    mutex_cout.lock();
-                    cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
-                    " al tempo " << piece_to_box.get_min() << ":" << piece_to_box.get_sec() << " in posizione " <<
-                    piece_to_box.get_pos() << endl;
-                    mutex_cout.unlock();
-                    
-      
+        // Posizionamento del pezzo nella scatola:       
+        mutex_cout.lock();
+        cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
+        " al tempo " << calc_new_min(time_piece) << ":" << time_piece % 60 << " in posizione " <<
+        piece_to_box.get_pos() << endl;
+        mutex_cout.unlock();
+    
         // spostamento nella scatola del pezzo afferato
         store_box.load_piece(piece_to_box);
         mutex_cout.lock();
@@ -89,12 +87,19 @@ void get_piece_to_box_B(const char ID_cobot, uint conveyor_lenght, uint conveyor
 
         if(piece_queue_line2.is_empty() && end_file_B){
             mutex_cout.lock();
-            cout << "COBOT "<< ID_cobot << " go to OFF" << endl;
+            cout << "\033[31m" << "COBOT "<< ID_cobot << " go to OFF" << "\033[39m" << endl;
             mutex_cout.unlock();
             cobotB_run = false;
         }
     }
 
+    // Riporre in magazzino l'ultima scatola finiti i pezzi sulconveyor:
     store_box.last_piece();
-    cout << "COBOT A CHIUSA" << endl;
 }
+
+// Funzione per l'aggiornamento di presa dei pezzi:
+uint calc_new_min(uint total_time){
+    uint new_min = total_time / 60;
+    return new_min; 
+}
+
