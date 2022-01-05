@@ -19,7 +19,7 @@ void Store::append_box(){
     // AGV che trasferisce la scatola in magazzino
     unique_lock<mutex> mlock(mtx_store_);
     box_in_store_.push_back(store_box.clear_box());
-    cout << "\033[36m" << "AGV transport BOX to STORE" << "\033[39m" << endl;
+    cout << "\033[36m" << "AGV transport: collect BOX n."<< store_box.box_ID() << " --> bring to store" << "\033[39m" << endl;
     mlock.unlock();
 }
 
