@@ -33,9 +33,9 @@ void get_piece_to_box_A(const char ID_cobot, uint conveyor_lenght, uint conveyor
 
         // Posizionamento del pezzo nella scatola:
         mutex_cout.lock();
-        cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
+        cout << "\033[1;35m" << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
         " al tempo " << calc_new_min(time_piece) << ":" << time_piece % 60 << " in posizione " <<
-        piece_to_box.get_pos() << endl;
+        piece_to_box.get_pos() << "\033[0;39m" << endl;
         mutex_cout.unlock();
 
         // Spostamento nella scatola del pezzo afferato
@@ -74,9 +74,9 @@ void get_piece_to_box_B(const char ID_cobot, uint conveyor_lenght, uint conveyor
 
         // Posizionamento del pezzo nella scatola:       
         mutex_cout.lock();
-        cout << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
+        cout << "\033[1;34m" << "Cobot linea di trasporto " << ID_cobot << ": recuperato componente "<< piece_to_box.get_piece_type() << 
         " al tempo " << calc_new_min(time_piece) << ":" << time_piece % 60 << " in posizione " <<
-        piece_to_box.get_pos() << endl;
+        piece_to_box.get_pos() << "\033[0;39m"  << endl;
         mutex_cout.unlock();
     
         // spostamento nella scatola del pezzo afferato

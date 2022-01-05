@@ -37,6 +37,9 @@ using namespace std::chrono;
 *   magenta                 \033[35m    \033[45m
 *   cyan                    \033[36m    \033[46m
 *   default                 \033[39m    \033[49m
+*   
+*   bold                    \033[1; color code
+*
 */
 
 int main(int argc, char* argv[]){
