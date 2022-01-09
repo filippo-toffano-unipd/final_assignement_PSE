@@ -1,20 +1,20 @@
 FINAL ASSIGNEMENT PSE CORSE
 
-=====================================================================================================================================================
+======================================================================================================================================================
 
 ##  Introduzione:
 
 
 Lo scopo dell'assegnamento è simulare un sistema di 2 linee di trasporto pezzi costitutite ognuna da:
     - 1 sistema di visione che rileva la presenza di un pezzo nel conveyor, la sua tipologia, la sua posizione e l'istante di rilevazione;
-    - 1 cobot che preleva il pezzo alla fine del conveyor e porlo in una scatola di capacità 10pz;
+    - 1 cobot che preleva il pezzo alla fine del conveyor e lo pone in una scatola di capacità 10pz;
 
 Una volta che la scatola sarà piena verrà risvegliato un sistema AGV che avrà il compito di prelevare la scatola e porla in magazzino.
 
 ## Setup
 
 Per prima cosa è necessario scaricare la repository.
-Per fare ciò basta copiare il link di questa repo (contenuto in alto a destra nella casella 'Code') e clonarla 
+Per fare ciò basta copiare il link di questa repo (contenuto in alto a destra nella casella `Code`) e clonarla 
 in un ambiente LINUX usando il comando:
 
 ```bash
